@@ -1,0 +1,56 @@
+﻿@model List<FirstMVCMaktab140.Entity.User>
+
+
+@{
+    ViewData["Title"] = "لیست کاربران";
+}
+<section class="card form-card">
+    <h1> لیست کاربران </h1>
+
+    @if(!Model.Any())
+    {
+        <h2> هنوز کاربری در سیستم وجود ندارد</h2>
+    }
+    else
+    {
+
+        <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ردیف</th>
+                        <th>نام کامل</th>
+                        <th>ایمیل</th>
+                        <th>پسورد</th>
+                        <th>عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int  i=0; i< Model.Count; i++)
+                    {
+                        var user = Model[i];
+                        <tr>
+                            <td>@(i+1)</td>
+                            <td>@user.FullName</td>
+                            <td>@user.Email</td>
+                            <td>@user.Password</td>
+                            <td>
+                                <a asp-controller="User"
+                                 asp-action="Detail"
+                                asp-route-id="@user.Id">
+                                دیدن جزئیات
+                                </a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+
+
+        </div>
+
+    }
+
+
+</section>

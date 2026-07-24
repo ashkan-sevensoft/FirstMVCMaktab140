@@ -1,0 +1,31 @@
+﻿@using FirstMVCMaktab140.Models
+@model LoginDto
+
+
+@{
+    ViewData["Title"] = "ورود کاربر";
+}
+
+<section class="card form-card">
+    <h1> ورود  کاربر </h1>
+    <form asp-action="Login" method="post">
+
+
+        <div asp-validation-summary="ModelOnly" class="error"></div>
+
+      
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email" class="error"></span>
+
+
+        <label asp-for="Password"></label>
+        <input asp-for="Password" />
+        <span asp-validation-for="Password" class="error"></span>
+
+
+        <button class="btn full" type="submit">ورود به  حساب </button>
+    </form>
+
+</section>
+
