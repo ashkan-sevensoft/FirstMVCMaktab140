@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using FirstMVCMaktab140.Models;
+using FirstMVCMaktab140.Services;
+using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FirstMVCMaktab140.Controllers
@@ -22,6 +24,13 @@ namespace FirstMVCMaktab140.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        // Fire-and-forget sample: /Home/SendWelcome?name=Ali
+        public IActionResult SendWelcome([FromServices] IBackgroundJobClient jobs, string name = "Ali")
+        {
+            var jobId = jobs.Enqueue<ReportJobService>(s => s.SendWelcomeEmail(name));
+            return Content($"Job {jobId} enqueued for {name}. Check /hangfire -> Succeeded.");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
